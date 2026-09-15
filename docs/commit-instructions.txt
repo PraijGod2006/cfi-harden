@@ -1,0 +1,40 @@
+CFI-HARDEN COMMIT RUNBOOK
+
+These commands are intentionally scoped. Each member must build and understand the received folder before committing it under their own Git identity. Do not create commits for another person and do not fabricate dates or authorship.
+
+MEMBER 1
+Place the received member1-architecture-and-progress folder at the repository root, replacing only that folder.
+From the repository root, inspect the interfaces and run: cmake -S . -B build -G Ninja; cmake --build build
+Then verify the plugin registration with: opt -load-pass-plugin=build/cfi-harden.so -passes=cfi-harden -disable-output sample.ll
+Commit only your folder:
+  git add member1-architecture-and-progress
+  git commit -m "Add pass architecture and orchestration"
+  git push
+Commit only after you have actually built and run it yourself.
+
+MEMBER 2
+Place the received member2-detection-and-analysis folder at the repository root, replacing only that folder.
+Build and run the unit executable: cmake -S . -B build -G Ninja; cmake --build build; ./build/cfi-unit-tests
+Commit only your folder:
+  git add member2-detection-and-analysis
+  git commit -m "Add indirect-call detection and signature analysis"
+  git push
+Commit only after you have actually built and run it yourself.
+
+MEMBER 3
+Place the received member3-generation-and-instrumentation folder at the repository root, replacing only that folder.
+Build the plugin and runtime: cmake -S . -B build -G Ninja; cmake --build build; cc -c member3-generation-and-instrumentation/runtime/cfi_runtime.c -o build/cfi_runtime.o
+Commit only your folder:
+  git add member3-generation-and-instrumentation
+  git commit -m "Add target generation and CFI instrumentation"
+  git push
+Commit only after you have actually built and run it yourself.
+
+MEMBER 4
+Place the received member4-integration-and-testing folder at the repository root, replacing only that folder.
+Run the complete verification: sh member4-integration-and-testing/scripts/build.sh; sh member4-integration-and-testing/scripts/run_tests.sh
+Commit only your folder:
+  git add member4-integration-and-testing
+  git commit -m "Add integration and performance tests"
+  git push
+Commit only after you have actually built and run it yourself.

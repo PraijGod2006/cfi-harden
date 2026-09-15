@@ -1,0 +1,39 @@
+# ==============================================================================
+# .gitignore for cfi-harden LLVM Project
+# ==============================================================================
+
+# Build output directories (NEVER commit compiled binaries to GitHub)
+build/
+bin/
+lib/
+
+# CMake cache and generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.ninja
+.ninja_*
+
+# Compiled objects, shared libraries, and LLVM bitcode
+*.o
+*.so
+*.a
+*.ll
+*.bc
+*.s
+*.out
+
+# Python bytecode and temporary generator files
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE and OS metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
